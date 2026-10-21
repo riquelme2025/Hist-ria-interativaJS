@@ -10,11 +10,11 @@ const perguntas = [
     alternativas: [
       {
         texto: "Educação.",
-        afirmacao: "afirmacao"
+        afirmacao: "Investir em educação prepara os cidadãos para o futuro e gera oportunidades."
       },
       {
         texto: "Saúde.",
-        afirmacao: "afirmacao"
+        afirmacao: "Investir em saúde garante atendimento à população e melhora a qualidade de vida."
 
       }
     ]
@@ -24,11 +24,11 @@ const perguntas = [
     alternativas: [
       {
         texto: "Investir em infraestrutura.",
-        afirmacao: "afirmacao"
+        afirmacao: "Melhorar a infraestrutura ajuda a evitar vazamentos e garante o abastecimento de água."
       },
       {
         texto: "Criar campanhas de conscientização.",
-        afirmacao: "afirmacao"
+        afirmacao: "Conscientizar a população ajuda a reduzir o desperdício de água."
       }
     ]
   },
@@ -37,11 +37,11 @@ const perguntas = [
     alternativas: [
       {
         texto: "Aumentar a coleta.",
-        afirmacao: "afirmacao"
+        afirmacao: "Aumentar a coleta mantém as ruas limpas e reduz o acúmulo de lixo."
       },
       {
         texto: "Investir em reciclagem.",
-        afirmacao: "afirmacao"
+        afirmacao: "Incentivar a reciclagem reduz a quantidade de lixo e ajuda a preservar o meio ambiente."
       }
     ]
   },
@@ -50,11 +50,11 @@ const perguntas = [
     alternativas: [
       {
         texto: " Melhorar o transporte público.",
-        afirmacao: "afirmacao"
+        afirmacao: "Um transporte público eficiente reduz o número de carros nas ruas e melhora a mobilidade."
       },
       {
         texto: "Construir novas vias.",
-        afirmacao: "afirmacao"
+        afirmacao: "Construir novas vias pode melhorar o fluxo de veículos e diminuir os congestionamentos."
       }
     ]
 
@@ -64,12 +64,11 @@ const perguntas = [
     alternativas: [
       {
         texto: " A cidade ficou mais sustentável.",
-        afirmacao: "afirmacao"
+        afirmacao: "As decisões tomadas ao longo dos anos contribuíram para o equilíbrio entre o desenvolvimento e a preservação ambiental."
       },
       {
         texto: "A cidade melhorou economicamente, mas ainda enfrenta problemas ambientais.",
-        afirmacao: "afirmacao"
-
+        afirmacao: "O crescimento econômico trouxe benefícios, mas ainda são necessários investimentos para resolver os problemas ambientais."
       }
     ]
   },
@@ -80,8 +79,13 @@ let perguntaAtual;
 let historiaFinal = "";
 
 function mostraPergunta() {
+  if (atual >= perguntas.length) {
+    mostraResultado();
+    return;
+  }
   perguntaAtual = perguntas[atual];
   caixaPerguntas.textContent = perguntaAtual.enunciado
+  caixaAlternativas.textContent = "";
   mostraAlternativas();
 }
 
@@ -94,10 +98,17 @@ function mostraAlternativas() {
   }
 }
 function respostaSelecionada(opcaoSelecionada) {
-  const afirmacoes = opcaoSelecionada.afirmacoes;
-  historiaFinal += afirmacoes + " ";
+  const afirmacao = opcaoSelecionada.afirmacao;
+  historiaFinal += afirmacao + " ";
   atual++;
   mostraPergunta();
 }
+
+function mostraResultado() {
+  caixaPerguntas.textContent = "Em 2030 ...";
+  textoResultado.textContent = historiaFinal;
+  caixaAlternativas.textContent = "";
+}
+
+
 mostraPergunta();
-  
